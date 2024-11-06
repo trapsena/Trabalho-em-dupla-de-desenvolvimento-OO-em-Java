@@ -40,7 +40,7 @@ public class Recarga {
         String data = agora.format(formatter);
 
 
-        energiaCarregada = carroEncontrado.kWh() - carroEncontrado.getAtualKwh()
+        double energiaCarregada = carroEncontrado.kWh() - carroEncontrado.getAtualKwh()
         carroEncontrado.setAtualKwh(carroEncontrado.kWh());
         System.out.println("Recarga registrada com sucesso.");
         
