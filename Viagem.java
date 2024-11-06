@@ -105,6 +105,7 @@ public class Viagem {
                     eletroposto = Eletroposto.validarPostos();
                 }else{
                     eletroposto = eletroposto + "-" +  Eletroposto.validarPostos();
+                    Recarga.registrarRecarga(energiaNecessaria, eletroposto, veiculo);
                 }
                 //Preciso fazer recarga
                 if (rota < 0){
