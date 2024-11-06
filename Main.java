@@ -28,7 +28,7 @@ public class Main {
             System.out.println("9 - Listar Viagens");
             System.out.println("10 - Listar Carros com baixa Bateria");
             System.out.println("11 - Listar historico de carregamento");
-            System.out.println("12 - Registrar Recarga");
+            System.out.println("12 - Listar Recarga");
             System.out.println("99 - Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -235,8 +235,11 @@ public class Main {
             }
         }
 
-        public static void registrarRecarga() {
-        
+        public static void registrarRecarga(String placa, String eletroposto) {
+            Recarga recarga = Recarga.registrarRecarga(placa, eletroposto);
+            historicoRecargas.add(recarga);
+        }
+}
 
 
 
