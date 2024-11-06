@@ -48,12 +48,12 @@ public class Eletroposto {
 
         String posto = null;
         List<Eletroposto> eletropostos = Main.getEletropostos();
-        // Loop para garantir que o usuário insira um veículo válido
+
         while (posto == null) {
-            System.out.print("Digite a placa do veículo: ");
+            System.out.print("Digite Id do posto: ");
             String temp = scanner.nextLine();
 
-            // Busca o carro na lista
+
             for (Eletroposto eletroposto : eletropostos) {
                 if (String.valueOf(eletroposto.getId()).equalsIgnoreCase(temp)) {
                     posto = String.valueOf(eletroposto.getId());
