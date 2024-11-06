@@ -101,7 +101,7 @@ public class Viagem {
         double rota = veiculo.getmaxKM() - distanciaKM;
         do { 
             if (rota < 1){
-                ultimoPosto = Eletroposto.validarPostos()
+                ultimoPosto = Eletroposto.validarPostos();
                 if ("Nenhum".equals(eletroposto)){
                     eletroposto = ultimoPosto;
                 }else{

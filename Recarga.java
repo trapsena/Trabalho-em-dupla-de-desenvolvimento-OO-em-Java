@@ -1,55 +1,53 @@
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Recarga {
-    private LocalDateTime data;
+    private String data;
     private String placa;
     private String eletroposto;
-    private double energiaCarregada;
+    private String energiaCarregada;
 
-    public Recarga(String placa, String eletroposto, LocalDateTime data) {
-        this.placa = placa
+    public Recarga(String placa, String eletroposto, String data, String energiaCarregada) {
+        this.placa = placa;
         this.eletroposto = eletroposto;
-        this.data = data
+        this.data = data;
         this.energiaCarregada = energiaCarregada;
-        
     }
+
+    static List<Carro> carros = Main.getCarros();
     
-
-    List<Carro> carros = Main.getCarros();
-
-    public LocalDateTime getData() { return data; }
-    public double getEnergiaCarregada() { return energiaCarregada; }
-    public String getEletroposto() { return eletroposto; }
-
-    public static void registrarRecarga(String placa, String eletroposto) {
-
-        Carro carroEncontrado = null;
-        for (Carro carro : carros) {
+        public String getData() { return data; }
+        public String getEnergiaCarregada() { return energiaCarregada; }
+        public String getEletroposto() { return eletroposto; }
+    
+        public static Recarga registrarRecarga(String placa, String eletroposto) { 
+    
+            Carro carroEncontrado = null;
+            for (Carro carro : carros) {
             if (carro.getPlaca().equalsIgnoreCase(placa)) {
                 carroEncontrado = carro;
                 break;
             }
         }
-
-        System.out.print("Digite o nome do eletroposto: ");
-        String eletroposto = scanner.nextLine();
+        
+        if (carroEncontrado == null) {
+            System.out.println("Carro não encontrado.");
+            return null;  
+        }
 
         LocalDateTime agora = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String data = agora.format(formatter);
 
-
-        double energiaCarregada = carroEncontrado.kWh() - carroEncontrado.getAtualKwh()
-        carroEncontrado.setAtualKwh(carroEncontrado.kWh());
-        System.out.println("Recarga registrada com sucesso.");
-        
-        return new Recarga(placa, eletroposto, energiaCarregada, data);
-
-        
+        double energia = carroEncontrado.getkWh() - carroEncontrado.getAtualKwh();
+        if (energia==0){
+            energia = carroEncontrado.getkWh();
         }
-      
-    }
+        String energiaCarregada = String.format("%.2f", energia);
+        carroEncontrado.setAtualKwh(carroEncontrado.getkWh());
+        System.out.println("Recarga registrada com sucesso.");
 
-    
+        return new Recarga(placa, eletroposto, data, energiaCarregada);  
+    }
+}

@@ -2,9 +2,6 @@ import java.util.Scanner;
 
 public class Motorista{
 
-    static void listarViagens() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
     private String nome;
     private int nIdentific;
     private String nHabilitacao;
