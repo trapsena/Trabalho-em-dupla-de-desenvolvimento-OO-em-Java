@@ -108,7 +108,7 @@ public class Viagem {
                     eletroposto = eletroposto + "-" +  ultimoPosto;
                     
                 }
-                Main.registrarRecarga(veiculo.getPlaca(), eletroposto);
+                Main.registrarRecarga(veiculo.getPlaca(), ultimoPosto);
                 if (rota < 0){
                     rota = veiculo.getmaxKM() + rota;
                 }
