@@ -6,6 +6,7 @@ public class Recarga {
     private LocalDateTime data;
     private String placa;
     private String eletroposto;
+    private double energiaCarregada;
 
     public Recarga(String placa, String eletroposto, LocalDateTime data) {
         this.placa = placa
@@ -47,7 +48,7 @@ public class Recarga {
         return new Recarga(placa, eletroposto, energiaCarregada, data);
 
         
-    }
+        }
       
     }
 
