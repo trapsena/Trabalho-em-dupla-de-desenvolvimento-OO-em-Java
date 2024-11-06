@@ -4,14 +4,15 @@ import java.util.List;
 
 public class Recarga {
     private LocalDateTime data;
-    private double energiaCarregada;
+    private String placa;
     private String eletroposto;
-;   private static List<Recarga> historicoRecargas = new ArrayList<>();
 
-    public Recarga(double energiaCarregada, String eletroposto) {
-        this.data = LocalDateTime.now();
-        this.energiaCarregada = energiaCarregada;
+    public Recarga(String placa, String eletroposto, LocalDateTime data) {
+        this.placa = placa
         this.eletroposto = eletroposto;
+        this.data = data
+        this.energiaCarregada = energiaCarregada;
+        
     }
     
 
@@ -21,14 +22,33 @@ public class Recarga {
     public double getEnergiaCarregada() { return energiaCarregada; }
     public String getEletroposto() { return eletroposto; }
 
-    public static void registrarRecarga(double energiaCarregada, String eletroposto, Carro carro) {
-        if (energiaCarregada <= 0 || (carro.getAtualKwh() + energiaCarregada) > carro.getkWh()) {
-            System.out.println("Energia de recarga inválida.");
-            return;
+    public static void registrarRecarga(String placa, String eletroposto) {
+
+        Carro carroEncontrado = null;
+        for (Carro carro : carros) {
+            if (carro.getPlaca().equalsIgnoreCase(placa)) {
+                carroEncontrado = carro;
+                break;
+            }
         }
 
-        carro.setAtualKwh(carro.getAtualKwh() + energiaCarregada);
-        historicoRecargas.add(new Recarga(energiaCarregada, eletroposto));
+        System.out.print("Digite o nome do eletroposto: ");
+        String eletroposto = scanner.nextLine();
+
+        LocalDateTime agora = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String data = agora.format(formatter);
+
+
+        energiaCarregada = carroEncontrado.kWh() - carroEncontrado.getAtualKwh()
+        carroEncontrado.setAtualKwh(carroEncontrado.kWh());
         System.out.println("Recarga registrada com sucesso.");
+        
+        return new Recarga(placa, eletroposto, energiaCarregada, data);
+
+        
     }
-}
+      
+    }
+
+    
