@@ -236,44 +236,7 @@ public class Main {
         }
 
         public static void registrarRecarga() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Digite a placa do carro para registrar a recarga: ");
-        String placa = scanner.nextLine();
-
-        Carro carroEncontrado = null;
-        for (Carro carro : carros) {
-            if (carro.getPlaca().equalsIgnoreCase(placa)) {
-                carroEncontrado = carro;
-                break;
-            }
-        }
-
-        if (carroEncontrado == null) {
-            System.out.println("Carro com a placa " + placa + " não encontrado.");
-            return;
-        }
-
-        System.out.print("Digite a quantidade de energia carregada (kWh): ");
-        double energiaCarregada = scanner.nextDouble();
-        scanner.nextLine(); // Consumir nova linha
-
-        System.out.print("Digite o nome do eletroposto: ");
-        String eletroposto = scanner.nextLine();
-
-        if (energiaCarregada <= 0 || (carroEncontrado.getAtualKwh() + energiaCarregada) > carroEncontrado.getkWh()) {
-            System.out.println("Energia de recarga inválida.");
-            return;
-        }
-
-        // Atualizar o kWh atual do carro e registrar a recarga
-        carroEncontrado.setAtualKwh(carroEncontrado.getAtualKwh() + energiaCarregada);
-        Recarga recarga = new Recarga(energiaCarregada, eletroposto);
-        historicoRecargas.add(recarga);
-        System.out.println("Recarga registrada com sucesso.");
-    }
-      
-    }
-
+        
 
 
 
