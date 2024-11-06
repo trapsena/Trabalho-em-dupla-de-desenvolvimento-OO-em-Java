@@ -28,7 +28,7 @@ public class Main {
             System.out.println("9 - Listar Viagens");
             System.out.println("10 - Listar Carros com baixa Bateria");
             System.out.println("11 - Listar historico de carregamento");
-            System.out.println("12 - Listar Recarga");
+
             System.out.println("99 - Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -67,8 +67,6 @@ public class Main {
                 case 10 -> BateriaBaixa();
 
                 case 11 -> consultarHistoricoCarga();
-
-                case 12 -> registrarRecarga();
 
 
                 case 99 -> {
@@ -182,63 +180,63 @@ public class Main {
             }
         
         }
-        public static void listarViagens() {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Digite o número de identificação do motorista para listar suas viagens: ");
-            int nIdentific = scanner.nextInt();
-    
-            boolean encontrou = false;
-    
-            for (Viagem viagem : viagens) {
-                if (viagem.getNome() == nIdentific) {
-                    System.out.println("Local: " + viagem.getLocal() + ", Distância: " + viagem.getDistancia() +
-                                       " km, Consumo: " + viagem.getConsumo() + " kWh, Veículo: " + viagem.getVeiculo() +
-                                       ", Eletroposto: " + viagem.getEletroposto());
-                    encontrou = true;
-                }
-            }
-    
-            if (!encontrou) {
-                System.out.println("Nenhuma viagem encontrada para o motorista com identificação " + nIdentific);
+    public static void listarViagens() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite o número de identificação do motorista para listar suas viagens: ");
+        int nIdentific = scanner.nextInt();
+
+        boolean encontrou = false;
+
+        for (Viagem viagem : viagens) {
+            if (viagem.getNome() == nIdentific) {
+                System.out.println("Local: " + viagem.getLocal() + ", Distância: " + viagem.getDistancia() +
+                                   " km, Consumo: " + viagem.getConsumo() + " kWh, Veículo: " + viagem.getVeiculo() +
+                                   ", Eletroposto: " + viagem.getEletroposto());
+                encontrou = true;
             }
         }
 
-        public static void consultarHistoricoCarga() {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Digite a placa do carro para consultar o histórico de recargas: ");
-            String placa = scanner.nextLine();
-    
-            Carro encontrado = null;
-    
-            // Procura o carro na lista pela placa
-            for (Carro carro : carros) {
-                if (carro.getPlaca().equalsIgnoreCase(placa)) {
-                    encontrado = carro;
-                    break;
-                }
-            }
-    
-            // Se o carro foi encontrado, exibe o histórico de recargas
-            if (encontrado != null) {
-                System.out.println("Histórico de recargas para o carro com placa " + placa + ":");
-                if (historicoRecargas.isEmpty()) {
-                    System.out.println("Nenhuma recarga registrada.");
-                    return;
-                }
-                for (Recarga recarga : historicoRecargas) {
-                    System.out.println("Data: " + recarga.getData() +
-                                       ", Energia Carregada: " + recarga.getEnergiaCarregada() +
-                                       " kWh, Eletroposto: " + recarga.getEletroposto());
-                }
-            } else {
-                System.out.println("Carro com a placa " + placa + " não encontrado.");
+        if (!encontrou) {
+            System.out.println("Nenhuma viagem encontrada para o motorista com identificação " + nIdentific);
+        }
+    }
+
+    public static void consultarHistoricoCarga() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite a placa do carro para consultar o histórico de recargas: ");
+        String placa = scanner.nextLine();
+
+        Carro encontrado = null;
+
+        // Procura o carro na lista pela placa
+        for (Carro carro : carros) {
+            if (carro.getPlaca().equalsIgnoreCase(placa)) {
+                encontrado = carro;
+                break;
             }
         }
 
-        public static void registrarRecarga(String placa, String eletroposto) {
-            Recarga recarga = Recarga.registrarRecarga(placa, eletroposto);
-            historicoRecargas.add(recarga);
+        // Se o carro foi encontrado, exibe o histórico de recargas
+        if (encontrado != null) {
+            System.out.println("Histórico de recargas para o carro com placa " + placa + ":");
+            if (historicoRecargas.isEmpty()) {
+                System.out.println("Nenhuma recarga registrada.");
+                return;
+            }
+            for (Recarga recarga : historicoRecargas) {
+                System.out.println("Data: " + recarga.getData() +
+                                   ", Energia Carregada: " + recarga.getEnergiaCarregada() +
+                                   " kWh, Eletroposto: " + recarga.getEletroposto());
+            }
+        } else {
+            System.out.println("Carro com a placa " + placa + " não encontrado.");
         }
+    }
+
+    public static void registrarRecarga(String placa, String eletroposto) {
+        Recarga recarga = Recarga.registrarRecarga(placa, eletroposto);
+        historicoRecargas.add(recarga);
+    }
 }
 
 
