@@ -97,14 +97,15 @@ public class Viagem {
         }
 
         String eletroposto = "Nenhum";
-
+        String ultimoPosto = "";
         double rota = veiculo.getmaxKM() - distanciaKM;
         do { 
             if (rota < 1){
+                ultimoPosto = Eletroposto.validarPostos()
                 if ("Nenhum".equals(eletroposto)){
-                    eletroposto = Eletroposto.validarPostos();
+                    eletroposto = ultimoPosto;
                 }else{
-                    eletroposto = eletroposto + "-" +  Eletroposto.validarPostos();
+                    eletroposto = eletroposto + "-" +  ultimoPosto;
                     Recarga.registrarRecarga(energiaNecessaria, eletroposto, veiculo);
                 }
                 //Preciso fazer recarga
